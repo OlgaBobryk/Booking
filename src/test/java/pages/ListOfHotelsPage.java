@@ -1,23 +1,22 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 
 
-
 public class ListOfHotelsPage {
-    private SelenideElement hotelName = $(By.xpath("//h3//a//div[@data-testid='title' and contains(text(), 'Congress Plaza Hotel Chicago')]"));
-    private SelenideElement raiting = $(By.xpath("//h3//a//div[@data-testid='title' and contains(text(), 'Congress Plaza Hotel Chicago')]//following::a[2]//div[contains(text(),'7.3')]"));
+    private final String HOTEL_NAME = "//h3//a//div[@data-testid='title' and contains(text(), 'Congress Plaza Hotel Chicago')]";
+    private final String HOTEL_RATING = "//h3//a//div[@data-testid='title' and contains(text(), 'Congress Plaza Hotel Chicago')]//following::a[2]//div[contains(@aria-label,'Scored ')]";
 
     public String isPresentedHotelName(String hotel) {
-        String actualNameHotel = hotelName.getText();
-        return actualNameHotel;
+        String hotelName = String.format(HOTEL_NAME, hotel);
+        $(By.xpath(hotelName)).getText();
+        return hotel;
     }
 
-    public String isPresentedRatingHotel() {
-        String actualRating = raiting.getText();
-        return actualRating;
+    public String isPresentedRatingHotel(String rating) {
+        String hotelRating = String.format(HOTEL_RATING, rating);
+        $(By.xpath(hotelRating)).getText();
+        return rating;
     }
 }
-
